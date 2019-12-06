@@ -34,8 +34,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+    func application(_ : UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         window = UIWindow()
 
         appCoordinator = AppCoordinator(window: window!, container: container, navigationController: UINavigationController(), launchInstructor: LaunchInstructor.configure(isAutorized: UserService.shared.isAuthonticated()))
