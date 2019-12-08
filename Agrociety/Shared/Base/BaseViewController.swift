@@ -26,7 +26,10 @@ class BaseViewController: UIViewController, CoordinatorNavigationControllerDeleg
 
     private func setupNavigationController() {
         if let navigationController = self.navigationController as? CoordinatorNavigationController {
+            print("Coordinator Navigation Controller configured")
             navigationController.swipeBackDelegate = self
+        } else {
+            print("Missing Coordinator Navigation Controller")
         }
     }
 

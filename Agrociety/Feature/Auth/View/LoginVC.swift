@@ -11,10 +11,12 @@ protocol LoginVCProtocol: AnyObject {
     var onBack: (() -> Void)? { get set }
     var onLogin: (() -> Void)? { get set }
     var onSignUp: (() -> Void)? { get set }
+    var onForgotPassword: (() -> Void)? {get set}
 }
 
 class LoginVC: BaseViewController, LoginVCProtocol, AuthStoryboardLodable {
     
+
     
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet var txtFieldPassword: UITextField!
@@ -34,9 +36,15 @@ class LoginVC: BaseViewController, LoginVCProtocol, AuthStoryboardLodable {
     var onBack: (() -> Void)?
     var onLogin: (() -> Void)?
     var onSignUp: (() -> Void)?
+    var onForgotPassword: (() -> Void)?
 
     private var disposeBag = DisposeBag()
 
+    
+    @IBAction func onForgotPassword(_ sender: Any) {
+        self.onForgotPassword?()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,7 +56,7 @@ class LoginVC: BaseViewController, LoginVCProtocol, AuthStoryboardLodable {
         
         // Add Blur layer
         formContainer.addBlurToView(alpha: 0.3)
-        formContainer.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        formContainer.layoutMargins = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
         formContainer.isLayoutMarginsRelativeArrangement = true
         //setUpValidator()
         //setUI()

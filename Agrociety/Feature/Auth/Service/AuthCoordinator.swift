@@ -37,7 +37,9 @@ final class AuthCoordinator: Coordinator, CoordinatorFinishOutput {
     // MARK: - Private methods
 
     private func showLoginVC() {
+        
         let vc = container.resolveViewController(LoginVC.self)
+        
         vc.onBack = { [unowned self] in
             self.navigationController.popVC()
         }
@@ -47,8 +49,23 @@ final class AuthCoordinator: Coordinator, CoordinatorFinishOutput {
         vc.onSignUp = {
             self.showSignUpVC()
         }
+        vc.onForgotPassword = {
+            self.showForgotPasswordVC()
+        }
 
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.pushVC(vc)
+    }
+    
+    // Configure and push Forgot Password View Controller
+    private func showForgotPasswordVC() {
+        
+        let vc = container.resolveViewController(ForgotPasswordVC.self)
+        
+        vc.onBack = {[unowned self] in
+           self.navigationController.popVC()
+        }
+        
+        navigationController.pushVC(vc)
     }
 
     private func showSignUpVC() {

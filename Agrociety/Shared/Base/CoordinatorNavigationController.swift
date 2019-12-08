@@ -75,13 +75,13 @@ class CoordinatorNavigationController: UINavigationController {
     }
 
     private func setupCustomBackButton(viewController: UIViewController) {
-        if backButtonImage != nil || backButtonTitle != nil {
-            viewController.navigationItem.hidesBackButton = true
-            let backButtonTitle = shouldUseViewControllerTitles ? viewControllers[self.viewControllers.count - 2].title : self.backButtonTitle
-            let button = CustomBackButton.initCustomBackButton(backButtonImage: backButtonImage, backButtonTitle: backButtonTitle, backButtonfont: backButtonfont, backButtonTitleColor: backButtonTitleColor)
-            button.addTarget(self, action: #selector(actionBack(sender:)), for: .touchUpInside)
-            viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        }
+        viewController.navigationItem.hidesBackButton = true
+        let defaultTitle = self.backButtonTitle != nil ?
+            self.backButtonTitle : "Back"
+        let backButtonTitle = shouldUseViewControllerTitles ? viewControllers[self.viewControllers.count - 2].title : defaultTitle
+        let button = CustomBackButton.initCustomBackButton(backButtonImage: backButtonImage, backButtonTitle: backButtonTitle, backButtonfont: backButtonfont, backButtonTitleColor: backButtonTitleColor)
+        button.addTarget(self, action: #selector(actionBack(sender:)), for: .touchUpInside)
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
     }
 
     // MARK: - Actions
@@ -98,15 +98,6 @@ class CoordinatorNavigationController: UINavigationController {
         setupCustomBackButton(viewController: viewController)
     }
 
-    // MARK: - Initialization
-
-    override init(rootViewController: UIViewController) {
-        super.init(rootViewController: rootViewController)
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 }
 
 // MARK: - Extensions
