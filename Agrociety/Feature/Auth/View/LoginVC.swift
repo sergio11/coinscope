@@ -13,13 +13,16 @@ protocol LoginVCProtocol: AnyObject {
     var onSignUp: (() -> Void)? { get set }
 }
 
-class LoginVC: BaseTableViewController, LoginVCProtocol, AuthStoryboardLodable {
+class LoginVC: BaseViewController, LoginVCProtocol, AuthStoryboardLodable {
     
     
-    @IBOutlet var btnLogin: UIButton!
+    @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet var txtFieldPassword: UITextField!
     @IBOutlet var txtFieldEmail: UITextField!
 
+    @IBOutlet weak var imageViewBackground: UIImageView!
+    
+    @IBOutlet weak var formContainer: UIStackView!
     // Validator
     private let validator = Validator()
 
@@ -36,9 +39,20 @@ class LoginVC: BaseTableViewController, LoginVCProtocol, AuthStoryboardLodable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpValidator()
-        setUI()
-        bindViewModel()
+        
+        
+        // Configure Login Button
+        loginBtn.layer.cornerRadius = 12
+        loginBtn.layer.borderWidth = 3
+        loginBtn.layer.borderColor = UIColor(named: "colorPrimaryDark")?.cgColor
+        
+        // Add Blur layer
+        formContainer.addBlurToView(alpha: 0.3)
+        formContainer.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        formContainer.isLayoutMarginsRelativeArrangement = true
+        //setUpValidator()
+        //setUI()
+        //bindViewModel()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,11 +103,11 @@ class LoginVC: BaseTableViewController, LoginVCProtocol, AuthStoryboardLodable {
         bind(textField: txtFieldEmail, to: loginViewModel.email)
 
         loginViewModel.isValidAll
-        .bind(to: btnLogin.rx.isEnabled)
+        .bind(to: loginBtn.rx.isEnabled)
         .disposed(by: disposeBag)
         
         
-        btnLogin.rx.tap.asObservable()
+        loginBtn.rx.tap.asObservable()
         .bind(to: loginViewModel.loginButtonTapped)
         .disposed(by: disposeBag)
         
