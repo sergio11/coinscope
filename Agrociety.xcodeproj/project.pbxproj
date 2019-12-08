@@ -66,6 +66,8 @@
 		1AF1F3C52307CC4100D1F7A5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1F3C22307CC4100D1F7A5 /* BaseViewController.swift */; };
 		1AF1F3C62307CC4100D1F7A5 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1F3C32307CC4100D1F7A5 /* BaseTableViewController.swift */; };
 		2E9CDC03D2E43563A4504C71 /* Pods_AgrocietyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2AE1A049E15E597AA90B277 /* Pods_AgrocietyUITests.framework */; };
+		3D84CDB7239D1E6B0080E244 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D84CDB6239D1E6B0080E244 /* ForgotPasswordVC.swift */; };
+		3D84CDB9239D1F180080E244 /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D84CDB8239D1F180080E244 /* ForgotPasswordViewModel.swift */; };
 		3D875384239ACB3500CFE005 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D875383239ACB3500CFE005 /* Extension+UIView.swift */; };
 		3D875386239AD00200CFE005 /* Extension+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D875385239AD00200CFE005 /* Extension+CGRect.swift */; };
 		3D875388239ADB1300CFE005 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D875387239ADB1300CFE005 /* Launch Screen.storyboard */; };
@@ -155,6 +157,8 @@
 		1AF1F3C22307CC4100D1F7A5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1AF1F3C32307CC4100D1F7A5 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		3914CB4BA1F561A2CA0A98C7 /* Pods-AgrocietyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgrocietyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AgrocietyUITests/Pods-AgrocietyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3D84CDB6239D1E6B0080E244 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		3D84CDB8239D1F180080E244 /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		3D875383239ACB3500CFE005 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		3D875385239AD00200CFE005 /* Extension+CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CGRect.swift"; sourceTree = "<group>"; };
 		3D875387239ADB1300CFE005 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 				1A4597772209E19F00515891 /* Auth.storyboard */,
 				1A4597792209E19F00515891 /* LoginVC.swift */,
 				1A45977A2209E19F00515891 /* SignUpVC.swift */,
+				3D84CDB6239D1E6B0080E244 /* ForgotPasswordVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -265,6 +270,7 @@
 			children = (
 				1A45977C2209E19F00515891 /* LogInViewModel.swift */,
 				1A45977D2209E19F00515891 /* SignUpViewModel.swift */,
+				3D84CDB8239D1F180080E244 /* ForgotPasswordViewModel.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -814,6 +820,7 @@
 				1AF1F3BC2307A3DC00D1F7A5 /* Extension+UINavigationBar.swift in Sources */,
 				3D875384239ACB3500CFE005 /* Extension+UIView.swift in Sources */,
 				1A4597872209E19F00515891 /* SignUpVC.swift in Sources */,
+				3D84CDB7239D1E6B0080E244 /* ForgotPasswordVC.swift in Sources */,
 				1AF1F378230503A900D1F7A5 /* BookDetailVC.swift in Sources */,
 				1A4597A32209E1AE00515891 /* Extension+Json.swift in Sources */,
 				1AF1F3AD2307188200D1F7A5 /* HomeCoordinator.swift in Sources */,
@@ -822,6 +829,7 @@
 				1A7971E2220DB0DE00866332 /* HomeViewModel.swift in Sources */,
 				1AE0B75C234A608A0093872D /* Extension+Swinject.swift in Sources */,
 				1A4597822209E19F00515891 /* AuthService.swift in Sources */,
+				3D84CDB9239D1F180080E244 /* ForgotPasswordViewModel.swift in Sources */,
 				1AF1F3742303D6E700D1F7A5 /* Extensions+Rx.swift in Sources */,
 				1A21A0D22307F76A00C9237C /* UserService.swift in Sources */,
 				3D875386239AD00200CFE005 /* Extension+CGRect.swift in Sources */,

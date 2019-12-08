@@ -20,10 +20,6 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="imageBackground" image="intro_background" translatesAutoresizingMaskIntoConstraints="NO" id="0YL-xE-k2P">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="896" id="6u0-oQ-zYD"/>
-                                    <constraint firstAttribute="width" constant="414" id="FTS-dR-9nv"/>
-                                </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="4MX-We-fnQ">
                                 <rect key="frame" x="67.5" y="182" width="279" height="532"/>
@@ -137,6 +133,9 @@
                                                 <state key="normal" title="Forgot your password?">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="onForgotPassword:" destination="DPq-fM-OsR" eventType="touchUpInside" id="Tuj-sA-ESB"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -177,12 +176,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="0YL-xE-k2P" firstAttribute="top" secondItem="noI-Al-pvD" secondAttribute="top" id="Edi-n5-OUs"/>
-                            <constraint firstItem="0YL-xE-k2P" firstAttribute="leading" secondItem="noI-Al-pvD" secondAttribute="leading" id="ZaR-vh-eff"/>
+                            <constraint firstItem="0YL-xE-k2P" firstAttribute="trailing" secondItem="7Lm-ty-NcK" secondAttribute="trailing" id="3Bz-o9-w4U"/>
+                            <constraint firstItem="0YL-xE-k2P" firstAttribute="top" secondItem="noI-Al-pvD" secondAttribute="top" id="LxA-FG-G2E"/>
+                            <constraint firstAttribute="bottom" secondItem="0YL-xE-k2P" secondAttribute="bottom" id="Xbp-Kl-5Ea"/>
+                            <constraint firstItem="0YL-xE-k2P" firstAttribute="centerX" secondItem="noI-Al-pvD" secondAttribute="centerX" id="hLm-Bf-LWb"/>
                             <constraint firstItem="4MX-We-fnQ" firstAttribute="centerY" secondItem="noI-Al-pvD" secondAttribute="centerY" id="lMG-zZ-26w"/>
                             <constraint firstItem="4MX-We-fnQ" firstAttribute="centerX" secondItem="noI-Al-pvD" secondAttribute="centerX" id="on3-Es-Dhe"/>
-                            <constraint firstItem="0YL-xE-k2P" firstAttribute="bottom" secondItem="noI-Al-pvD" secondAttribute="bottom" id="qbw-CK-Cob"/>
-                            <constraint firstItem="0YL-xE-k2P" firstAttribute="trailing" secondItem="noI-Al-pvD" secondAttribute="trailing" id="w0C-8g-gEQ"/>
+                            <constraint firstItem="0YL-xE-k2P" firstAttribute="leading" secondItem="7Lm-ty-NcK" secondAttribute="leading" id="pzk-TH-8vq"/>
+                            <constraint firstItem="0YL-xE-k2P" firstAttribute="centerY" secondItem="noI-Al-pvD" secondAttribute="centerY" id="rZr-Vw-kM6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Lm-ty-NcK"/>
                     </view>
@@ -195,6 +196,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ett-Mj-lbC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="779.71014492753625" y="185.49107142857142"/>
+        </scene>
+        <!--Forgot PasswordVC-->
+        <scene sceneID="E0o-88-ZfQ">
+            <objects>
+                <viewController storyboardIdentifier="ForgotPasswordVC" id="u5u-Ns-BCa" customClass="ForgotPasswordVC" customModule="Agrociety" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GWw-dz-mwP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro_background" translatesAutoresizingMaskIntoConstraints="NO" id="6d6-pQ-FEG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Ta-WH-qO1">
+                                <rect key="frame" x="191" y="431" width="32" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1Ta-WH-qO1" firstAttribute="centerY" secondItem="GWw-dz-mwP" secondAttribute="centerY" id="0uL-OG-IAi"/>
+                            <constraint firstItem="6d6-pQ-FEG" firstAttribute="trailing" secondItem="hfZ-0e-qcZ" secondAttribute="trailing" id="8rN-4M-GcX"/>
+                            <constraint firstItem="6d6-pQ-FEG" firstAttribute="top" secondItem="GWw-dz-mwP" secondAttribute="top" id="Hlr-Jl-RIm"/>
+                            <constraint firstItem="1Ta-WH-qO1" firstAttribute="centerX" secondItem="GWw-dz-mwP" secondAttribute="centerX" id="NAg-wV-pAC"/>
+                            <constraint firstItem="6d6-pQ-FEG" firstAttribute="leading" secondItem="hfZ-0e-qcZ" secondAttribute="leading" id="O6n-if-IDF"/>
+                            <constraint firstAttribute="bottom" secondItem="6d6-pQ-FEG" secondAttribute="bottom" id="d46-GL-VBC"/>
+                            <constraint firstItem="6d6-pQ-FEG" firstAttribute="centerY" secondItem="GWw-dz-mwP" secondAttribute="centerY" id="nAG-fK-5Ze"/>
+                            <constraint firstItem="6d6-pQ-FEG" firstAttribute="centerX" secondItem="GWw-dz-mwP" secondAttribute="centerX" id="pok-yA-nZH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hfZ-0e-qcZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="txtFieldEmail" destination="1Ta-WH-qO1" id="CCZ-sy-UgQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mKy-sh-bTE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1576.8115942028987" y="180.80357142857142"/>
         </scene>
         <!--Sign UpVC-->
         <scene sceneID="yRn-cq-A6b">
@@ -396,7 +435,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y4i-R6-baN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1631" y="179"/>
+            <point key="canvasLocation" x="2552" y="185"/>
         </scene>
     </scenes>
     <resources>

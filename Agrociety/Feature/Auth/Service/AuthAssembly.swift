@@ -24,6 +24,10 @@ final class AuthAssembly: Assembly {
         container.register(LogInViewModel.self, factory: { container in
             LogInViewModel(service: container.resolve(MoyaProvider<AuthService>.self)!, userService: container.resolve(UserService.self)!)
         }).inObjectScope(ObjectScope.container)
+        
+        container.register(ForgotPasswordViewModel.self, factory: { container in
+            ForgotPasswordViewModel()
+        }).inObjectScope(ObjectScope.container)
 
         // view controllers
         container.storyboardInitCompleted(LoginVC.self) { r, c in
@@ -31,6 +35,10 @@ final class AuthAssembly: Assembly {
         }
         container.storyboardInitCompleted(SignUpVC.self) { r, c in
             c.signUpViewModel = r.resolve(SignUpViewModel.self)
+        }
+        
+        container.storyboardInitCompleted(ForgotPasswordVC.self) { r, c in
+            c.forgotPasswordViewModel = r.resolve(ForgotPasswordViewModel.self)
         }
     }
 }

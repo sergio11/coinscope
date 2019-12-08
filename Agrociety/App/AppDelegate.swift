@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var assembler: Assembler!
 
     func application(_: UIApplication, willFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        
+        
         assembler = Assembler([
             AuthAssembly(),
             HomeAssembly()
