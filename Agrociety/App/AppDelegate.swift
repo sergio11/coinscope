@@ -40,10 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
 
-        appCoordinator = AppCoordinator(window: window!, container: container, navigationController: UINavigationController(), launchInstructor: LaunchInstructor.configure(isAutorized: UserService.shared.isAuthonticated()))
+        appCoordinator = AppCoordinator(window: window!, container: container, navigationController: CoordinatorNavigationController(), launchInstructor: LaunchInstructor.configure(isAutorized: UserService.shared.isAuthonticated()))
             
         appCoordinator.start()
         window?.makeKeyAndVisible()
+
 
         return true
     }

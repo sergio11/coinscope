@@ -13,7 +13,7 @@ import RxCocoa
 
 // View Controller Protocol
 protocol ForgotPasswordVCProtocol: AnyObject {
-    var onBack: (() -> Void)? { get set }
+    var onBack: (() -> Void)? { get set}
     var onSend: (() -> Void)? { get set }
 }
 
@@ -21,6 +21,8 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
     
     
     @IBOutlet var txtFieldEmail: UITextField!
+    @IBOutlet var formContainerStackView: UIStackView!
+    @IBOutlet weak var sendEmailBtn: UIButton!
     
     
     // View Model
@@ -34,15 +36,22 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpValidator()
+        bindViewModel()
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func didSelectCustomBackAction() {
-        onBack?()
+        print("didSelectCustomBackAction")
+        self.onBack?()
+    }
+    
+    @IBAction func onTappedSendEmail(_ sender: Any) {
+        self.validator.validate(self)
     }
     
     
@@ -54,25 +63,36 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
     
     // Private Methods
     
+    
+    private func setupUI() {
+        
+        self.formContainerStackView.addBlurToView(alpha: 0.3)
+        self.formContainerStackView.layoutMargins = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+        self.formContainerStackView.isLayoutMarginsRelativeArrangement = true
+        
+        self.sendEmailBtn.layer.cornerRadius = 12
+        self.sendEmailBtn.layer.borderWidth = 3
+        self.sendEmailBtn.layer.borderColor = UIColor(named: "colorPrimaryDark")?.cgColor
+    }
+    
     private func bindViewModel() {
         
         configureTwoBinding(textField: txtFieldEmail, to: forgotPasswordViewModel.email)
         
-        
         forgotPasswordViewModel
             .onShowAlert
-            .map {
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
                 AppHUD.shared.showErrorMessage($0.message ?? "", title: $0.title ?? "")
-            }
-            .subscribe()
+            })
             .disposed(by: disposeBag)
 
         forgotPasswordViewModel
             .onShowingLoading
-            .map { [weak self] in
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
                 self?.setLoadingHud(visible: $0)
-            }
-            .subscribe()
+            })
             .disposed(by: disposeBag)
         
     }
@@ -93,8 +113,10 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
     
     private func setLoadingHud(visible: Bool) {
         if visible {
+            print("Show HUD")
             AppHUD.shared.showHUD()
         } else {
+            print("Hide HUD")
             AppHUD.shared.hideHUD()
         }
     }

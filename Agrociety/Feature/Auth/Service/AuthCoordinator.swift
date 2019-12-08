@@ -53,16 +53,19 @@ final class AuthCoordinator: Coordinator, CoordinatorFinishOutput {
             self.showForgotPasswordVC()
         }
 
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.pushVC(vc)
     }
     
     // Configure and push Forgot Password View Controller
     private func showForgotPasswordVC() {
+        
         let vc = container.resolveViewController(ForgotPasswordVC.self)
-        vc.onBack = { [unowned self] in
-            self.navigationController.dismiss(animated: true, completion: nil)
+        
+        vc.onBack = {[unowned self] in
+           self.navigationController.popVC()
         }
-        navigationController.pushViewController(vc, animated: true)
+        
+        navigationController.pushVC(vc)
     }
 
     private func showSignUpVC() {

@@ -24,8 +24,7 @@ final class ForgotPasswordViewModel {
     var email = BehaviorRelay<String>(value: "")
     
     var onShowingLoading: Observable<Bool> {
-        return isLoading.asObservable()
-            .distinctUntilChanged()
+        return isLoading.asObservable().distinctUntilChanged()
     }
 
     var onShowAlert: Observable<AlertMessage> {
@@ -41,11 +40,13 @@ final class ForgotPasswordViewModel {
         
         isLoading.accept(true)
         
+        print("Send Email")
         
-        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 5) {
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 6) {
             
+            print("Response from server")
             self.isLoading.accept(false)
-            self.alertMessage.onNext(AlertMessage(title: "Error", message: "Email couldn`t send"))
+            self.alertMessage.onNext(AlertMessage(title: "Error", message: "The server does not respond"))
             
         }
         

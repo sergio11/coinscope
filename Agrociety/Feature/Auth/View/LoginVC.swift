@@ -56,7 +56,7 @@ class LoginVC: BaseViewController, LoginVCProtocol, AuthStoryboardLodable {
         
         // Add Blur layer
         formContainer.addBlurToView(alpha: 0.3)
-        formContainer.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        formContainer.layoutMargins = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
         formContainer.isLayoutMarginsRelativeArrangement = true
         //setUpValidator()
         //setUI()
