@@ -16,13 +16,16 @@ extension UIView {
     /**
         Add Blur To View with specified alpha value
      */
-    func addBlurToView(alpha a: Float = 0.8, byPercentage percentage: CGFloat = 0.2) {
+    func addBlurToView(alpha a: Float = 0.8, reducePercentageOfWidth wp: CGFloat = 0.0, reducePercentageOfHeight hp: CGFloat = 0.0) {
         let blurEffect = UIBlurEffect(style: .light)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = self.bounds.decreaseRect(byPercentage: percentage)
+        
+        let adjustmentBounds = wp > 0.0 || hp > 0.0 ? self.bounds.decreaseRect(widthPercentage: wp, heightPercentage: hp) : self.bounds
+        
+        blurredEffectView.frame = adjustmentBounds
         blurredEffectView.alpha = alpha
         blurredEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.addSubview(blurredEffectView)
+        self.insertSubview(blurredEffectView, at: 0)
     }
     
     /**

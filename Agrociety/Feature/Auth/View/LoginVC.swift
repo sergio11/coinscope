@@ -22,6 +22,7 @@ class LoginVC: BaseViewController, LoginVCProtocol, AuthStoryboardLodable {
 
     @IBOutlet weak var imageViewBackground: UIImageView!
     
+    @IBOutlet weak var formContainer: UIStackView!
     // Validator
     private let validator = Validator()
 
@@ -45,8 +46,10 @@ class LoginVC: BaseViewController, LoginVCProtocol, AuthStoryboardLodable {
         loginBtn.layer.borderWidth = 3
         loginBtn.layer.borderColor = UIColor(named: "colorPrimaryDark")?.cgColor
         
-
-        imageViewBackground.addBlurToView(alpha: 0.3)
+        // Add Blur layer
+        formContainer.addBlurToView(alpha: 0.3)
+        formContainer.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        formContainer.isLayoutMarginsRelativeArrangement = true
         //setUpValidator()
         //setUI()
         //bindViewModel()
