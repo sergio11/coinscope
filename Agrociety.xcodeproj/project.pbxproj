@@ -10,7 +10,6 @@
 		16E0B12BB97B0391C355CF1A /* Pods_AgrocietyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F7E1F7D7F27258FDC024F2 /* Pods_AgrocietyTests.framework */; };
 		1A21A0D22307F76A00C9237C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A21A0D12307F76A00C9237C /* UserService.swift */; };
 		1A45976B2209E17600515891 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4597672209E17600515891 /* AppDelegate.swift */; };
-		1A45976F2209E19700515891 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A45976D2209E19600515891 /* LaunchScreen.storyboard */; };
 		1A4597822209E19F00515891 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4597732209E19F00515891 /* AuthService.swift */; };
 		1A4597832209E19F00515891 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4597752209E19F00515891 /* User.swift */; };
 		1A4597842209E19F00515891 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A4597772209E19F00515891 /* Auth.storyboard */; };
@@ -67,6 +66,9 @@
 		1AF1F3C52307CC4100D1F7A5 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1F3C22307CC4100D1F7A5 /* BaseViewController.swift */; };
 		1AF1F3C62307CC4100D1F7A5 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF1F3C32307CC4100D1F7A5 /* BaseTableViewController.swift */; };
 		2E9CDC03D2E43563A4504C71 /* Pods_AgrocietyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2AE1A049E15E597AA90B277 /* Pods_AgrocietyUITests.framework */; };
+		3D875384239ACB3500CFE005 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D875383239ACB3500CFE005 /* Extension+UIView.swift */; };
+		3D875386239AD00200CFE005 /* Extension+CGRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D875385239AD00200CFE005 /* Extension+CGRect.swift */; };
+		3D875388239ADB1300CFE005 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D875387239ADB1300CFE005 /* Launch Screen.storyboard */; };
 		6538C1A4588B5AFC77E80B96 /* Pods_Agrociety.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9661F4C12AA0FBF2A5B0225A /* Pods_Agrociety.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,7 +93,6 @@
 		0DDCC6FB22377EF9675C8B08 /* Pods-iOSBoilerplate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSBoilerplate.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iOSBoilerplate/Pods-iOSBoilerplate.debug.xcconfig"; sourceTree = "<group>"; };
 		1A21A0D12307F76A00C9237C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		1A4597672209E17600515891 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A45976E2209E19600515891 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A4597732209E19F00515891 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		1A4597752209E19F00515891 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1A4597772209E19F00515891 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
@@ -154,6 +155,9 @@
 		1AF1F3C22307CC4100D1F7A5 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1AF1F3C32307CC4100D1F7A5 /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		3914CB4BA1F561A2CA0A98C7 /* Pods-AgrocietyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgrocietyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AgrocietyUITests/Pods-AgrocietyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		3D875383239ACB3500CFE005 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		3D875385239AD00200CFE005 /* Extension+CGRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+CGRect.swift"; sourceTree = "<group>"; };
+		3D875387239ADB1300CFE005 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		40DD0A133BFFD8628F332E4D /* Pods-Agrociety.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agrociety.release.xcconfig"; path = "Pods/Target Support Files/Pods-Agrociety/Pods-Agrociety.release.xcconfig"; sourceTree = "<group>"; };
 		5683D36F631E622E3BE50EE0 /* Pods-AgrocietyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AgrocietyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AgrocietyTests/Pods-AgrocietyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5B6CABBB6093D8E4E14A31EE /* Pods-Agrociety.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agrociety.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Agrociety/Pods-Agrociety.debug.xcconfig"; sourceTree = "<group>"; };
@@ -205,14 +209,6 @@
 				1AF1F3C02307B9E500D1F7A5 /* Main.storyboard */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		1A45976C2209E19600515891 /* Base.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				1A45976D2209E19600515891 /* LaunchScreen.storyboard */,
-			);
-			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 		1A4597702209E19F00515891 /* Feature */ = {
@@ -310,6 +306,8 @@
 				1AF1F3BB2307A3DC00D1F7A5 /* Extension+UINavigationBar.swift */,
 				1AE0B75B234A608A0093872D /* Extension+Swinject.swift */,
 				1A98628423605EDF00D0B9DE /* Extension+Validation.swift */,
+				3D875383239ACB3500CFE005 /* Extension+UIView.swift */,
+				3D875385239AD00200CFE005 /* Extension+CGRect.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -374,11 +372,11 @@
 			children = (
 				1A45978C2209E1AE00515891 /* Shared */,
 				1A4597702209E19F00515891 /* Feature */,
-				1A45976C2209E19600515891 /* Base.lproj */,
 				1A4597632209E16300515891 /* App */,
 				1A6F7B86220936B7003A38B4 /* Assets.xcassets */,
 				1A6F7B84220936B6003A38B4 /* README.md */,
 				1A6F7B5F220935AA003A38B4 /* Info.plist */,
+				3D875387239ADB1300CFE005 /* Launch Screen.storyboard */,
 			);
 			path = Agrociety;
 			sourceTree = "<group>";
@@ -645,10 +643,10 @@
 				1AF1F3C12307B9E500D1F7A5 /* Main.storyboard in Resources */,
 				1A4597842209E19F00515891 /* Auth.storyboard in Resources */,
 				1A45978A2209E19F00515891 /* Home.storyboard in Resources */,
-				1A45976F2209E19700515891 /* LaunchScreen.storyboard in Resources */,
 				1A7971ED220DD44C00866332 /* BookTC.xib in Resources */,
 				1A6F7B8A220936B7003A38B4 /* README.md in Resources */,
 				1A6F7B8C220936B7003A38B4 /* Assets.xcassets in Resources */,
+				3D875388239ADB1300CFE005 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,6 +812,7 @@
 				1AF1F3C62307CC4100D1F7A5 /* BaseTableViewController.swift in Sources */,
 				1A98628523605EDF00D0B9DE /* Extension+Validation.swift in Sources */,
 				1AF1F3BC2307A3DC00D1F7A5 /* Extension+UINavigationBar.swift in Sources */,
+				3D875384239ACB3500CFE005 /* Extension+UIView.swift in Sources */,
 				1A4597872209E19F00515891 /* SignUpVC.swift in Sources */,
 				1AF1F378230503A900D1F7A5 /* BookDetailVC.swift in Sources */,
 				1A4597A32209E1AE00515891 /* Extension+Json.swift in Sources */,
@@ -825,6 +824,7 @@
 				1A4597822209E19F00515891 /* AuthService.swift in Sources */,
 				1AF1F3742303D6E700D1F7A5 /* Extensions+Rx.swift in Sources */,
 				1A21A0D22307F76A00C9237C /* UserService.swift in Sources */,
+				3D875386239AD00200CFE005 /* Extension+CGRect.swift in Sources */,
 				1AF1F3BF2307A40900D1F7A5 /* CustomBackButton.swift in Sources */,
 				1A4597AE2209E1AE00515891 /* K+Enum.swift in Sources */,
 				1A4597862209E19F00515891 /* LoginVC.swift in Sources */,
@@ -877,14 +877,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		1A45976D2209E19600515891 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1A45976E2209E19600515891 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 		1A45977F2209E19F00515891 /* Home.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
