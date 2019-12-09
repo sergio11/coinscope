@@ -3,9 +3,14 @@
 
 import Reachability
 import UIKit
+import RxRelay
+import RxSwift
 
 class BaseViewController: UIViewController, CoordinatorNavigationControllerDelegate {
+    
+    
     var isConnectedToInternet: Bool = false
+    var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +25,27 @@ class BaseViewController: UIViewController, CoordinatorNavigationControllerDeleg
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupNavigationController()
+    }
+    
+    // MARK: - Protected Methods
+    
+    func configureTwoBinding(textField: UITextField, to behaviorRelay: BehaviorRelay<String>) {
+        
+        behaviorRelay.asObservable()
+            .bind(to: textField.rx.text)
+            .disposed(by: disposeBag)
+        
+        textField.rx.text.orEmpty
+            .bind(to: behaviorRelay)
+            .disposed(by: disposeBag)
+    }
+    
+    func setLoadingHud(visible: Bool) {
+        if visible {
+            AppHUD.shared.showHUD()
+        } else {
+            AppHUD.shared.hideHUD()
+        }
     }
 
     // MARK: - Private methods

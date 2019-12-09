@@ -20,8 +20,9 @@ protocol ForgotPasswordVCProtocol: AnyObject {
 class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryboardLodable {
     
     
-    @IBOutlet var txtFieldEmail: UITextField!
-    @IBOutlet var formContainerStackView: UIStackView!
+    @IBOutlet weak var txtFieldEmail: UITextField!
+    @IBOutlet weak var txtFieldEmailErrorLabel: UILabel!
+    @IBOutlet weak var formContainerStackView: UIStackView!
     @IBOutlet weak var sendEmailBtn: UIButton!
     
     
@@ -31,7 +32,6 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
     // Validator
     private let validator = Validator()
     
-    private var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +39,20 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
         bindViewModel()
         setupUI()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+  
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        resetErrors()
+        txtFieldEmail.text = ""
     }
     
-    override func didSelectCustomBackAction() {
-        print("didSelectCustomBackAction")
-        self.onBack?()
-    }
     
     @IBAction func onTappedSendEmail(_ sender: Any) {
-        self.validator.validate(self)
+        self.validate()
+    }
+    
+    @IBAction func actionBackToLogin(_ sender: Any) {
+        self.onBack?()
     }
     
     
@@ -61,8 +62,7 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
     var onSend: (() -> Void)?
     
     
-    // Private Methods
-    
+    // MARK: - Private Methods
     
     private func setupUI() {
         
@@ -97,29 +97,10 @@ class ForgotPasswordVC: BaseViewController, ForgotPasswordVCProtocol, AuthStoryb
         
     }
     
-    
-    private func configureTwoBinding(textField: UITextField, to behaviorRelay: BehaviorRelay<String>) {
-        behaviorRelay.asObservable()
-            .bind(to: textField.rx.text)
-            .disposed(by: disposeBag)
-        textField.rx.text.orEmpty
-            .bind(to: behaviorRelay)
-            .disposed(by: disposeBag)
-    }
-    
     private func sendEmail() {
         forgotPasswordViewModel.send()
     }
     
-    private func setLoadingHud(visible: Bool) {
-        if visible {
-            print("Show HUD")
-            AppHUD.shared.showHUD()
-        } else {
-            print("Hide HUD")
-            AppHUD.shared.hideHUD()
-        }
-    }
 }
 
 
@@ -129,6 +110,7 @@ extension ForgotPasswordVC: ValidationDelegate {
 
     // ValidationDelegate methods
     func validationSuccessful() {
+        resetErrors()
         sendEmail()
     }
 
@@ -144,7 +126,30 @@ extension ForgotPasswordVC: ValidationDelegate {
     }
     
     // Private method
+    
+    private func validate() {
+        resetErrors()
+        self.validator.validate(self)
+    }
+    
     private func setUpValidator() {
-        validator.registerField(txtFieldEmail, rules: [RequiredRule(), EmailRule(), MinLengthRule(length: 5)])
+        
+        validator.registerField(txtFieldEmail,
+            errorLabel: txtFieldEmailErrorLabel,
+            rules: [RequiredRule(), EmailRule(), MinLengthRule(length: 5)])
+    }
+    
+    
+    private func resetErrors () {
+        for validation in self.validator.validations.enumerated() {
+            let validationRule = validation.element.value
+            // Reset Error Label
+            validationRule.errorLabel?.isHidden = false
+            validationRule.errorLabel?.text = ""
+            
+            if let field = validationRule.field as? UITextField {
+                field.layer.borderColor = UIColor.white.cgColor
+            }
+        }
     }
 }

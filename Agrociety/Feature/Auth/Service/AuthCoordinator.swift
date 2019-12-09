@@ -36,6 +36,7 @@ final class AuthCoordinator: Coordinator, CoordinatorFinishOutput {
 
     // MARK: - Private methods
 
+    // Configure and present Login View Controller
     private func showLoginVC() {
         
         let vc = container.resolveViewController(LoginVC.self)
@@ -68,17 +69,18 @@ final class AuthCoordinator: Coordinator, CoordinatorFinishOutput {
         navigationController.pushVC(vc)
     }
 
+    // Configure and present Signup View Controller
     private func showSignUpVC() {
         let vc = container.resolveViewController(SignUpVC.self) 
         vc.onBack = { [unowned self] in
-            self.navigationController.dismiss(animated: true, completion: nil)
+            self.navigationController.popVC()
         }
         vc.onSignUp = {
-            self.navigationController.dismiss(animated: true, completion: nil)
+            self.navigationController.popVC()
         }
         vc.onSignIn = {
-            self.navigationController.dismiss(animated: true, completion: nil)
+            self.navigationController.popVC()
         }
-        navigationController.present(vc, animated: true, completion: nil)
+        navigationController.pushVC(vc)
     }
 }

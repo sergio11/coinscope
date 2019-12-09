@@ -12,23 +12,12 @@ final class LogInViewModel {
     init(service: MoyaProvider<AuthService>, userService: UserService) {
         authProvider = service
         self.userService = userService
-        
-        loginButtonTapped.asObserver()
-        .subscribe(onNext: { [weak self] in
-
-            guard let self = self else {
-                return
-            }
-
-            self.login()
-        }).disposed(by: disposeBag)
-        
     }
 
     
     private var authProvider: MoyaProvider<AuthService>
-       private var userService: UserService
-      private let disposeBag = DisposeBag()
+    private var userService: UserService
+    private let disposeBag = DisposeBag()
     
     private let isLoading = BehaviorRelay(value: false)
     private let alertMessage = PublishSubject<AlertMessage>()
@@ -49,45 +38,19 @@ final class LogInViewModel {
     var onSuccess: Observable<JSON> {
         return isSuccess.asObservable()
     }
-    
-    private var isPasswordValid: Observable<Bool> {
-        return password.asObservable().map { $0.count >= 6}
-    }
-    
-    private var isEmailValid: Observable<Bool> {
-        return email.asObservable().map { $0.count >= 6 && $0.isvalidEmail }
-    }
-    
-    let loginButtonTapped = PublishSubject<Void>()
 
- 
-    var isValidAll: Observable<Bool> {
-        return Observable.combineLatest(isPasswordValid,
-                                        isEmailValid) { $0 && $1 }.distinctUntilChanged()
-    }
 
     func login() {
-            isLoading.accept(true)
-
-        authProvider.request(.login(email.value, password.value), completion: { result in
-                self.isLoading.accept(false)
-
-                if case let .success(response) = result {
-                    do {
-                        let json = try JSON(data: response.data)
-                        if !json.isError {
-                            self.userService.save(token: json["token"].stringValue)
-                            self.isSuccess.onNext(json)
-                        } else {
-                            self.alertMessage.onNext(AlertMessage(title: json.message, message: ""))
-                        }
-                    } catch {
-                        self.alertMessage.onNext(AlertMessage(title: error.localizedDescription, message: ""))
-                    }
-                } else {
-                    self.alertMessage.onNext(AlertMessage(title: result.error?.errorDescription, message: ""))
-                }
-            })
+        
+        isLoading.accept(true)
+        
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 6) {
+            
+            print("Response from server")
+            self.isLoading.accept(false)
+            self.alertMessage.onNext(AlertMessage(title: "Error", message: "The server does not respond"))
+            
+        }
         
     }
 }
