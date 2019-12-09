@@ -14,27 +14,42 @@ protocol SignUpVCProtocol: AnyObject {
     var onSignIn: (() -> Void)? { get set }
 }
 
-class SignUpVC: BaseTableViewController, SignUpVCProtocol, AuthStoryboardLodable {
+class SignUpVC: BaseViewController, SignUpVCProtocol, AuthStoryboardLodable {
+    
+    
+    // MARK: - IBOutlets
     @IBOutlet var txtFieldFullName: UITextField!
+    @IBOutlet var txtFieldFullNameErrorLabel: UILabel!
     @IBOutlet var txtFieldEmailAddress: UITextField!
+    @IBOutlet var txtFieldEmailAddressErrorLabel: UILabel!
     @IBOutlet var txtFieldPassWord: UITextField!
+    @IBOutlet var txtFieldPassWordErrorLabel: UILabel!
+    @IBOutlet var txtFieldRepeatPassWord: UITextField!
+    @IBOutlet var txtFieldRepeatPassWordErrorLabel: UILabel!
     @IBOutlet var btnSignUp: UIButton!
+    @IBOutlet var formContainerStackView: UIStackView!
 
-    let validator = Validator()
+    // Form Validator
+    private let validator = Validator()
 
+    // SignUp View Model
     var signUpViewModel: SignUpViewModel!
 
-    private var disposeBag = DisposeBag()
 
     // MARK: - SignUpVCProtocol
 
     var onBack: (() -> Void)?
     var onSignUp: (() -> Void)?
     var onSignIn: (() -> Void)?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        bindVieModel()
+    
+    // MARK: IBActions
+    
+    @IBAction func actionLogin(_: Any) {
+        onSignIn?()
+    }
+    
+    @IBAction func actionSignup(_: Any) {
+        self.validate()
     }
 
     // MARK: - Overrides
@@ -42,68 +57,69 @@ class SignUpVC: BaseTableViewController, SignUpVCProtocol, AuthStoryboardLodable
     override func didSelectCustomBackAction() {
         onBack?()
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpValidator()
+        bindViewModel()
+        setupUI()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        resetErrors()
+        txtFieldFullName.text = ""
+        txtFieldEmailAddress.text = ""
+        txtFieldPassWord.text = ""
+        txtFieldRepeatPassWord.text = ""
+    }
 
-    @IBAction func actionLogin(_: Any) {
-        onSignIn?()
+    
+    // MARK: Private Methods
+    
+    private func setupUI() {
+        self.formContainerStackView.addBlurToView(alpha: 0.3)
+        self.formContainerStackView.layoutMargins = UIEdgeInsets(top: 10, left: 12, bottom: 10, right: 12)
+        self.formContainerStackView.isLayoutMarginsRelativeArrangement = true
+        
+        self.btnSignUp.layer.cornerRadius = 12
+        self.btnSignUp.layer.borderWidth = 3
+        self.btnSignUp.layer.borderColor = UIColor(named: "colorPrimaryDark")?.cgColor
     }
 
     private func signUP() {
         signUpViewModel.signUp()
     }
 
-    private func setLoadingHud(visible: Bool) {
-        if visible {
-            AppHUD.shared.showHUD()
-        } else {
-            AppHUD.shared.hideHUD()
-        }
-    }
-    
-    private func bind(textField: UITextField, to behaviorRelay: BehaviorRelay<String>) {
-           behaviorRelay.asObservable()
-               .bind(to: textField.rx.text)
-               .disposed(by: disposeBag)
-           textField.rx.text.orEmpty
-               .bind(to: behaviorRelay)
-               .disposed(by: disposeBag)
-       }
-
-    func bindVieModel() {
+    private func bindViewModel() {
        
-        bind(textField: txtFieldPassWord, to: signUpViewModel.password)
-        bind(textField: txtFieldEmailAddress, to: signUpViewModel.email)
-        bind(textField: txtFieldFullName, to: signUpViewModel.fullName)
+        configureTwoBinding(textField: txtFieldPassWord, to: signUpViewModel.password)
+        configureTwoBinding(textField: txtFieldEmailAddress, to: signUpViewModel.email)
+        configureTwoBinding(textField: txtFieldFullName, to: signUpViewModel.fullName)
 
-        signUpViewModel.isValidAll
-               .bind(to: btnSignUp.rx.isEnabled)
-               .disposed(by: disposeBag)
-        
-        btnSignUp.rx.tap.asObservable()
-               .bind(to: signUpViewModel.signButtonTapped)
-               .disposed(by: disposeBag)
 
         signUpViewModel
             .onShowAlert
-            .map { 
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {
                 AppHUD.shared.showErrorMessage($0.message ?? "", title: $0.title ?? "")
-            }
-            .subscribe()
+            })
             .disposed(by: disposeBag)
 
         signUpViewModel
             .onShowingLoading
-            .map { [weak self] in
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
                 self?.setLoadingHud(visible: $0)
-            }
-            .subscribe()
+            })
             .disposed(by: disposeBag)
 
         signUpViewModel
             .onSuccess
-            .map { _ in
-                self.onSignIn?()
-            }
-            .subscribe()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.onSignIn?()
+            })
             .disposed(by: disposeBag)
     }
 }
@@ -111,14 +127,12 @@ class SignUpVC: BaseTableViewController, SignUpVCProtocol, AuthStoryboardLodable
 // MARK: ValidationDelegate Methods
 
 extension SignUpVC: ValidationDelegate {
-    // Private method
-    func setUpValidator() {
-        validator.registerField(txtFieldFullName, rules: [RequiredRule(), MinLengthRule(length: 5)])
-        validator.registerField(txtFieldEmailAddress, rules: [RequiredRule(), EmailRule(), MinLengthRule(length: 5)])
-        validator.registerField(txtFieldPassWord, rules: [RequiredRule(), MinLengthRule(length: 5)])
-    }
+    
+
 
     // ValidationDelegate methods
+    
+    
     func validationSuccessful() {
         signUP()
     }
@@ -131,6 +145,44 @@ extension SignUpVC: ValidationDelegate {
             }
             error.errorLabel?.text = error.errorMessage // works if you added labels
             error.errorLabel?.isHidden = false
+        }
+    }
+    
+    // Private method
+    private func setUpValidator() {
+    
+        validator.registerField(txtFieldFullName,
+            errorLabel: txtFieldFullNameErrorLabel,
+            rules: [RequiredRule(), MinLengthRule(length: 5)])
+        
+        validator.registerField(txtFieldEmailAddress,
+            errorLabel: txtFieldEmailAddressErrorLabel,
+            rules: [RequiredRule(), EmailRule(), MinLengthRule(length: 5)])
+        
+        validator.registerField(txtFieldPassWord,
+            errorLabel: txtFieldPassWordErrorLabel,
+            rules: [RequiredRule(), MinLengthRule(length: 5)])
+        
+        validator.registerField(txtFieldRepeatPassWord,
+            errorLabel: txtFieldRepeatPassWordErrorLabel,
+            rules: [ConfirmationRule(confirmField: txtFieldPassWord)])
+    }
+    
+    private func validate() {
+        resetErrors()
+        self.validator.validate(self)
+    }
+    
+    private func resetErrors () {
+        for validation in self.validator.validations.enumerated() {
+            let validationRule = validation.element.value
+            // Reset Error Label
+            validationRule.errorLabel?.isHidden = false
+            validationRule.errorLabel?.text = ""
+            
+            if let field = validationRule.field as? UITextField {
+                field.layer.borderColor = UIColor.white.cgColor
+            }
         }
     }
 }

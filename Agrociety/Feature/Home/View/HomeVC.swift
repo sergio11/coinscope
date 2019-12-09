@@ -21,8 +21,6 @@ class HomeVC: BaseViewController, HomeVCProtocol, HomeStoryboardLodable {
 
     var homeViewModel: HomeViewModel!
 
-    private var disposeBag = DisposeBag()
-
     var btnLogout: UIBarButtonItem!
 
     // MARK: - HomeVCProtocol
@@ -63,13 +61,7 @@ class HomeVC: BaseViewController, HomeVCProtocol, HomeStoryboardLodable {
 // MARK: - Private functions
 
 extension HomeVC {
-    private func setLoadingHud(visible: Bool) {
-        if visible {
-            AppHUD.shared.showHUD()
-        } else {
-            AppHUD.shared.hideHUD()
-        }
-    }
+
 
     private func bindViewModel() {
         homeViewModel.getBooks()

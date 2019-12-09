@@ -1,10 +1,6 @@
 //
 //  ForgotPasswordViewModel.swift
 //  Agrociety
-//
-//  Created by Sergio Sánchez Sánchez on 08/12/2019.
-//  Copyright © 2019 sadman samee. All rights reserved.
-//
 
 import Foundation
 import RxRelay
@@ -13,7 +9,6 @@ import SwiftyJSON
 
 
 final class ForgotPasswordViewModel {
-    
     
     private let isLoading = BehaviorRelay(value: false)
     private let alertMessage = PublishSubject<AlertMessage>()
@@ -49,8 +44,6 @@ final class ForgotPasswordViewModel {
             self.alertMessage.onNext(AlertMessage(title: "Error", message: "The server does not respond"))
             
         }
-        
-        
     }
     
     

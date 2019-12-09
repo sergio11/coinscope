@@ -13,16 +13,7 @@ final class SignUpViewModel {
 
     init(service: MoyaProvider<AuthService>) {
         authProvider = service
-        
-        signButtonTapped.asObserver()
-               .subscribe(onNext: { [weak self] in
-
-                   guard let self = self else {
-                       return
-                   }
-
-                   self.signUp()
-               }).disposed(by: disposeBag)
+    
     }
 
     private let isLoading = BehaviorRelay(value: false)
@@ -33,7 +24,6 @@ final class SignUpViewModel {
     var password = BehaviorRelay<String>(value: "")
     var fullName = BehaviorRelay<String>(value: "")
 
-    let signButtonTapped = PublishSubject<Void>()
 
     var onShowingLoading: Observable<Bool> {
         return isLoading.asObservable()
@@ -47,37 +37,19 @@ final class SignUpViewModel {
     var onSuccess: Observable<JSON> {
         return isSuccess.asObservable()
     }
-
-    var isValidAll: Observable<Bool> {
-        return Observable.combineLatest(email, password) { email, password in
-            return (email.count >= 6 && email.isvalidEmail)
-                && password.count >= 6
-        }.share().distinctUntilChanged()
-    }
-    
     
 
     func signUp() {
-            isLoading.accept(true)
+        
+        isLoading.accept(true)
 
-        authProvider.request(.signUp(fullName.value, email.value, password.value), completion: { result in
-                self.isLoading.accept(false)
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + 6) {
             
-                if case let .success(response) = result {
-                    do {
-                        let json = try JSON(data: response.data)
-                        if !json.isError {
-                            self.isSuccess.onNext(json)
-                        } else {
-                            self.alertMessage.onNext(AlertMessage(title: json.message, message: ""))
-                        }
-                    } catch {
-                        self.alertMessage.onNext(AlertMessage(title: error.localizedDescription, message: ""))
-                    }
-                } else {
-                    self.alertMessage.onNext(AlertMessage(title: result.error?.errorDescription, message: ""))
-                }
-            })
+            print("Response from server")
+            self.isLoading.accept(false)
+            self.alertMessage.onNext(AlertMessage(title: "Error", message: "The server does not respond"))
+            
+        }
         
     }
 }
