@@ -1,8 +1,10 @@
-package com.dreamsoftware.coinscope.ui.extension
+package com.dreamsoftware.coinscope.core.presentation.util
 
 import com.dreamsoftware.coinscope.R
 
-fun String.coinSymbolToDrawable(): Int = when (uppercase()) {
+
+fun getDrawableIdForCoin(symbol: String): Int {
+    return when (symbol.uppercase()) {
         "1INCH" -> R.drawable._inch
         "ST" -> R.drawable._st
         "XBTC" -> R.drawable._xbtc
@@ -673,3 +675,4 @@ fun String.coinSymbolToDrawable(): Int = when (uppercase()) {
         "ZRX" -> R.drawable.zrx
         else -> R.drawable.question_sign
     }
+}
