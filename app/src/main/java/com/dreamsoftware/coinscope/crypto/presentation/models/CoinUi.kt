@@ -2,9 +2,9 @@ package com.dreamsoftware.coinscope.crypto.presentation.models
 
 import android.icu.text.NumberFormat
 import androidx.annotation.DrawableRes
-import com.dreamsoftware.coinscope.crypto.domain.Coin
 import com.dreamsoftware.coinscope.core.presentation.util.getDrawableIdForCoin
 import com.dreamsoftware.coinscope.crypto.presentation.coin_detail.DataPoint
+import com.dreamsoftware.coinscope.domain.model.CoinBO
 import java.util.Locale
 
 data class CoinUi(
@@ -24,7 +24,7 @@ data class DisplayableNumber(
     val formatted: String
 )
 
-fun Coin.toCoinUi(): CoinUi {
+fun CoinBO.toCoinUi(): CoinUi {
     return CoinUi(
         id = id,
         name = name,

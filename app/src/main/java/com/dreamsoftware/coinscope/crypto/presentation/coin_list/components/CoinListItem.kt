@@ -23,9 +23,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dreamsoftware.coinscope.crypto.domain.Coin
 import com.dreamsoftware.coinscope.crypto.presentation.models.CoinUi
 import com.dreamsoftware.coinscope.crypto.presentation.models.toCoinUi
+import com.dreamsoftware.coinscope.domain.model.CoinBO
 import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
 
 @Composable
@@ -90,7 +90,7 @@ fun CoinListItem(
 private fun CoinListItemPreview() {
     CryptoTrackerTheme {
         CoinListItem(
-            coinUi = previewCoin,
+            coinUi = previewCoinBO,
             onClick = { /*TODO*/ },
             modifier = Modifier.background(
                 MaterialTheme.colorScheme.background
@@ -99,7 +99,7 @@ private fun CoinListItemPreview() {
     }
 }
 
-internal val previewCoin = Coin(
+internal val previewCoinBO = CoinBO(
     id = "bitcoin",
     rank = 1,
     name = "Bitcoin",

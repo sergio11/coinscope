@@ -42,7 +42,7 @@ import androidx.compose.ui.unit.sp
 import com.dreamsoftware.coinscope.R
 import com.dreamsoftware.coinscope.crypto.presentation.coin_detail.components.InfoCard
 import com.dreamsoftware.coinscope.crypto.presentation.coin_list.CoinListState
-import com.dreamsoftware.coinscope.crypto.presentation.coin_list.components.previewCoin
+import com.dreamsoftware.coinscope.crypto.presentation.coin_list.components.previewCoinBO
 import com.dreamsoftware.coinscope.crypto.presentation.models.toDisplayableNumber
 import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
 import com.dreamsoftware.coinscope.ui.theme.greenBackground
@@ -188,7 +188,7 @@ private fun CoinDetailScreenPreview() {
     CryptoTrackerTheme {
         CoinDetailScreen(
             state = CoinListState(
-                selectedCoin = previewCoin,
+                selectedCoin = previewCoinBO,
             ),
             modifier = Modifier.background(
                 MaterialTheme.colorScheme.background

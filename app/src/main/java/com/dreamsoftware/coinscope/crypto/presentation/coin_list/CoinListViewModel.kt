@@ -2,9 +2,9 @@ package com.dreamsoftware.coinscope.crypto.presentation.coin_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dreamsoftware.coinscope.core.domain.util.onError
-import com.dreamsoftware.coinscope.core.domain.util.onSuccess
-import com.dreamsoftware.coinscope.crypto.domain.CoinDataSource
+import com.dreamsoftware.coinscope.domain.util.onError
+import com.dreamsoftware.coinscope.domain.util.onSuccess
+import com.dreamsoftware.coinscope.domain.CoinDataSource
 import com.dreamsoftware.coinscope.crypto.presentation.coin_detail.DataPoint
 import com.dreamsoftware.coinscope.crypto.presentation.models.CoinUi
 import com.dreamsoftware.coinscope.crypto.presentation.models.toCoinUi
@@ -20,7 +20,7 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 class CoinListViewModel(
-    private val coinDataSource: CoinDataSource
+    private val coinDataSource: com.dreamsoftware.coinscope.domain.CoinDataSource
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CoinListState())

@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.dreamsoftware.coinscope.crypto.presentation.coin_list.components.CoinListItem
-import com.dreamsoftware.coinscope.crypto.presentation.coin_list.components.previewCoin
+import com.dreamsoftware.coinscope.crypto.presentation.coin_list.components.previewCoinBO
 import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
 
 @Composable
@@ -60,7 +60,7 @@ private fun CoinListScreenPreview() {
         CoinListScreen(
             state = CoinListState(
                 coins = (1..100).map {
-                    previewCoin.copy(id = it.toString())
+                    previewCoinBO.copy(id = it.toString())
                 }
             ),
             modifier = Modifier

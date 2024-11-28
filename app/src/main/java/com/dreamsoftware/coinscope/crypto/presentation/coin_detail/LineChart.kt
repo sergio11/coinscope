@@ -27,7 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dreamsoftware.coinscope.crypto.domain.CoinPrice
+import com.dreamsoftware.coinscope.domain.model.CoinPrice
 import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -351,7 +351,7 @@ private fun LineChartPreview() {
     CryptoTrackerTheme {
         val coinHistoryRandomized = remember {
             (1..20).map {
-                CoinPrice(
+                com.dreamsoftware.coinscope.domain.model.CoinPrice(
                     priceUsd = Random.nextFloat() * 1000.0,
                     dateTime = ZonedDateTime.now().plusHours(it.toLong())
                 )
