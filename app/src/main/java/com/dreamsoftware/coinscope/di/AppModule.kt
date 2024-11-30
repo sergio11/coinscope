@@ -1,18 +1,39 @@
 package com.dreamsoftware.coinscope.di
 
-import com.dreamsoftware.coinscope.data.networking.HttpClientFactory
-import com.dreamsoftware.coinscope.data.networking.RemoteCoinDataSource
-import com.dreamsoftware.coinscope.domain.CoinDataSource
-import com.dreamsoftware.coinscope.ui.presentation.coin_list.CoinListViewModel
-import io.ktor.client.engine.cio.CIO
-import org.koin.androidx.viewmodel.dsl.viewModelOf
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.bind
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import javax.inject.Singleton
 
-val appModule = module {
-    single { HttpClientFactory.create(CIO.create()) }
-    singleOf(::RemoteCoinDataSource).bind<CoinDataSource>()
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
 
-    viewModelOf(::CoinListViewModel)
+    @DefaultDispatcher
+    @Provides
+    fun providesDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
+
+    @IoDispatcher
+    @Provides
+    fun providesIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+    @MainDispatcher
+    @Provides
+    fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+
+    @MainImmediateDispatcher
+    @Provides
+    fun providesMainImmediateDispatcher(): CoroutineDispatcher = Dispatchers.Main.immediate
+
+    @Singleton
+    @ApplicationScope
+    @Provides
+    fun providesCoroutineScope(
+        @DefaultDispatcher defaultDispatcher: CoroutineDispatcher
+    ): CoroutineScope = CoroutineScope(SupervisorJob() + defaultDispatcher)
 }

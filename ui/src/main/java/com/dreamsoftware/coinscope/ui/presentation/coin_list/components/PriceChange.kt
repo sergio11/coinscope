@@ -20,13 +20,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dreamsoftware.coinscope.ui.presentation.models.DisplayableNumber
+import com.dreamsoftware.coinscope.models.DisplayableNumberVO
 import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
 import com.dreamsoftware.coinscope.ui.theme.greenBackground
 
 @Composable
 fun PriceChange(
-    change: DisplayableNumber,
+    change: DisplayableNumberVO,
     modifier: Modifier = Modifier
 ) {
     val contentColor = if(change.value < 0.0) {
@@ -71,7 +71,7 @@ fun PriceChange(
 private fun PriceChangePreview() {
     CryptoTrackerTheme {
         PriceChange(
-            change = DisplayableNumber(
+            change = DisplayableNumberVO(
                 value = 2.43,
                 formatted = "2.43"
             )

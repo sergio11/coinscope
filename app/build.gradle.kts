@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -47,9 +49,43 @@ android {
 }
 
 dependencies {
+    // --------------------------------------------------------
+    // Core Libraries
+    // --------------------------------------------------------
+
+    // Desugar JDK libraries (required for certain Java 8+ features)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    // --------------------------------------------------------
+    // Project Modules
+    // --------------------------------------------------------
+
+    // Domain module for business logic and domain models
     implementation(project(":domain"))
+
+    // Data module for data layer
     implementation(project(":data"))
+
+    // UI module for Android UI components
     implementation(project(":ui"))
-    implementation(libs.bundles.koin)
+
+    // Utilities module for helper functions and extensions
+    implementation(project(":utils"))
+
+    // --------------------------------------------------------
+    // Dependency Injection (DI) - Hilt
+    // --------------------------------------------------------
+
+    // Hilt for Dependency Injection (DI)
+    implementation(libs.hilt.android)
+
+    // Hilt compiler for annotation processing
+    ksp(libs.hilt.compiler)
+
+    // --------------------------------------------------------
+    // Networking (Ktor)
+    // --------------------------------------------------------
+
+    // Ktor client libraries for HTTP requests, networking, and handling APIs
+    implementation(libs.bundles.ktor)
 }

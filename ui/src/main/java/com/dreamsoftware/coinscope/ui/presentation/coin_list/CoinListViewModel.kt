@@ -1,63 +1,36 @@
 package com.dreamsoftware.coinscope.ui.presentation.coin_list
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.dreamsoftware.coinscope.domain.util.onError
-import com.dreamsoftware.coinscope.domain.util.onSuccess
-import com.dreamsoftware.coinscope.domain.CoinDataSource
-import com.dreamsoftware.coinscope.ui.presentation.coin_detail.DataPoint
-import com.dreamsoftware.coinscope.ui.presentation.models.CoinUi
-import com.dreamsoftware.coinscope.ui.presentation.models.toCoinUi
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
+import com.dreamsoftware.coinscope.domain.model.CoinBO
+import com.dreamsoftware.coinscope.domain.usecase.GetCoinsUseCase
+import com.dreamsoftware.coinscope.models.CoinVO
+import com.dreamsoftware.coinscope.ui.presentation.core.SupportViewModel
+import com.dreamsoftware.coinscope.utils.IOneSideMapper
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class CoinListViewModel(
-    private val coinDataSource: CoinDataSource
-) : ViewModel() {
+@HiltViewModel
+class CoinListViewModel @Inject constructor(
+    private val getCoinsUseCase: GetCoinsUseCase,
+    private val coinVoMapper: IOneSideMapper<CoinBO, CoinVO>
+) : SupportViewModel<CoinListUiState, CoinListSideEffects>() {
 
-    private val _state = MutableStateFlow(CoinListState())
-    val state = _state
-        .onStart { loadCoins() }
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000L),
-            CoinListState()
-        )
+    override fun onGetDefaultState(): CoinListUiState = CoinListUiState()
 
-    private val _events = Channel<CoinListEvent>()
-    val events = _events.receiveAsFlow()
-
-    fun onAction(action: CoinListAction) {
-        when (action) {
-            is CoinListAction.OnCoinClick -> {
-                selectCoin(action.coinUi)
-            }
-        }
-    }
-
-    private fun selectCoin(coinUi: CoinUi) {
-        _state.update { it.copy(selectedCoin = coinUi) }
+    /*private fun selectCoin(coinVO: CoinVO) {
+        _state.update { it.copy(selectedCoin = coinVO) }
 
         viewModelScope.launch {
             coinDataSource
                 .getCoinHistory(
-                    coinId = coinUi.id,
+                    coinId = coinVO.id,
                     start = ZonedDateTime.now().minusDays(5),
                     end = ZonedDateTime.now()
                 )
                 .onSuccess { history ->
-                    val dataPoints = history
+                    val dataPointsUI = history
                         .sortedBy { it.dateTime }
                         .map {
-                            DataPoint(
+                            DataPointVO(
                                 x = it.dateTime.hour.toFloat(),
                                 y = it.priceUsd.toFloat(),
                                 xLabel = DateTimeFormatter
@@ -69,39 +42,25 @@ class CoinListViewModel(
                     _state.update {
                         it.copy(
                             selectedCoin = it.selectedCoin?.copy(
-                                coinPriceHistory = dataPoints
+                                coinPriceHistory = dataPointsUI
                             )
                         )
                     }
                 }
                 .onError { error ->
-                    _events.send(CoinListEvent.Error(error))
+                    _events.send(CoinListSideEffects.Error(error))
                 }
         }
+    }*/
+
+    fun loadCoins() {
+        executeUseCase(
+            useCase = getCoinsUseCase,
+            onSuccess = ::onLoadCoinsCompleted
+        )
     }
 
-    private fun loadCoins() {
-        viewModelScope.launch {
-            _state.update {
-                it.copy(
-                    isLoading = true
-                )
-            }
-
-            coinDataSource
-                .getCoins()
-                .onSuccess { coins ->
-                    _state.update {
-                        it.copy(
-                            isLoading = false,
-                            coins = coins.map { it.toCoinUi() }
-                        )
-                    }
-                }
-                .onError { error ->
-                    _state.update { it.copy(isLoading = false) }
-                    _events.send(CoinListEvent.Error(error))
-                }
-        }
+    private fun onLoadCoinsCompleted(coinList: List<CoinBO>) {
+        updateState { it.copy(coins = coinVoMapper.mapInListToOutList(coinList).toList()) }
     }
 }

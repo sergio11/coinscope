@@ -43,12 +43,34 @@ android {
 }
 
 dependencies {
+    // --------------------------------------------------------
+    // Core Libraries
+    // --------------------------------------------------------
+
+    // Desugar JDK libraries (required for certain Java 8+ features)
     coreLibraryDesugaring(libs.desugar.jdk.libs)
+
+    // --------------------------------------------------------
+    // Project Modules
+    // --------------------------------------------------------
+
+    // Domain module for business logic and domain models
     implementation(project(":domain"))
 
+    // Utilities module for helper functions and extensions
+    implementation(project(":utils"))
+
+    // --------------------------------------------------------
+    // Ktor - Networking and HTTP Client
+    // --------------------------------------------------------
+
+    // Ktor client libraries for HTTP requests, networking, and handling APIs
     implementation(libs.bundles.ktor)
 
+    // --------------------------------------------------------
+    // Testing Libraries
+    // --------------------------------------------------------
+
+    // JUnit for unit testing
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 }

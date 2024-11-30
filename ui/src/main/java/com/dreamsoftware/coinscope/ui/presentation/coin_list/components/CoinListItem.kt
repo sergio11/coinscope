@@ -23,14 +23,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dreamsoftware.coinscope.ui.presentation.models.CoinUi
-import com.dreamsoftware.coinscope.ui.presentation.models.toCoinUi
-import com.dreamsoftware.coinscope.domain.model.CoinBO
+import com.dreamsoftware.coinscope.models.CoinVO
+import com.dreamsoftware.coinscope.ui.presentation.core.extensions.symbolToCoinDrawable
+import com.dreamsoftware.coinscope.ui.presentation.core.extensions.toDisplayableNumber
 import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
 
 @Composable
 fun CoinListItem(
-    coinUi: CoinUi,
+    coinVO: CoinVO,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -47,8 +47,8 @@ fun CoinListItem(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(id = coinUi.iconRes),
-            contentDescription = coinUi.name,
+            imageVector = ImageVector.vectorResource(id = coinVO.iconRes),
+            contentDescription = coinVO.name,
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(85.dp)
         )
@@ -56,13 +56,13 @@ fun CoinListItem(
             modifier = Modifier.weight(1f)
         ) {
             Text(
-                text = coinUi.symbol,
+                text = coinVO.symbol,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = contentColor
             )
             Text(
-                text = coinUi.name,
+                text = coinVO.name,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Light,
                 color = contentColor
@@ -72,14 +72,14 @@ fun CoinListItem(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = "$ ${coinUi.priceUsd.formatted}",
+                text = "$ ${coinVO.priceUsd.formatted}",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = contentColor
             )
             Spacer(modifier = Modifier.height(8.dp))
             PriceChange(
-                change = coinUi.changePercent24Hr
+                change = coinVO.changePercent24Hr
             )
         }
     }
@@ -90,7 +90,7 @@ fun CoinListItem(
 private fun CoinListItemPreview() {
     CryptoTrackerTheme {
         CoinListItem(
-            coinUi = previewCoinBO,
+            coinVO = previewCoinBO,
             onClick = { /*TODO*/ },
             modifier = Modifier.background(
                 MaterialTheme.colorScheme.background
@@ -99,12 +99,13 @@ private fun CoinListItemPreview() {
     }
 }
 
-internal val previewCoinBO = CoinBO(
+internal val previewCoinBO = CoinVO(
     id = "bitcoin",
     rank = 1,
     name = "Bitcoin",
     symbol = "BTC",
-    marketCapUsd = 1241273958896.75,
-    priceUsd = 62828.15,
-    changePercent24Hr = 0.1
-).toCoinUi()
+    marketCapUsd = 1241273958896.75.toDisplayableNumber(),
+    priceUsd = 62828.15.toDisplayableNumber(),
+    changePercent24Hr = 0.1.toDisplayableNumber(),
+    iconRes = "BTC".symbolToCoinDrawable()
+)
