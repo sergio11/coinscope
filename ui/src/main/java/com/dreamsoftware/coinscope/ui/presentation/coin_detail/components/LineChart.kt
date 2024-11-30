@@ -31,7 +31,7 @@ import com.dreamsoftware.coinscope.models.ValueLabel
 import com.dreamsoftware.coinscope.domain.model.CoinPriceBO
 import com.dreamsoftware.coinscope.models.ChartStyle
 import com.dreamsoftware.coinscope.models.DataPointVO
-import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
+import com.dreamsoftware.coinscope.ui.theme.CoinScopeTheme
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
@@ -351,7 +351,7 @@ private fun getSelectedDataPointIndex(
 @Preview(widthDp = 1000)
 @Composable
 private fun LineChartPreview() {
-    CryptoTrackerTheme {
+    CoinScopeTheme {
         val coinHistoryRandomized = remember {
             (1..20).map {
                 CoinPriceBO(

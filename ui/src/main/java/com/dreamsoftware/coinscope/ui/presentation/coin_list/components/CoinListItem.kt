@@ -26,10 +26,10 @@ import androidx.compose.ui.unit.sp
 import com.dreamsoftware.coinscope.models.CoinVO
 import com.dreamsoftware.coinscope.ui.presentation.core.extensions.symbolToCoinDrawable
 import com.dreamsoftware.coinscope.ui.presentation.core.extensions.toDisplayableNumber
-import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
+import com.dreamsoftware.coinscope.ui.theme.CoinScopeTheme
 
 @Composable
-fun CoinListItem(
+internal fun CoinListItem(
     coinVO: CoinVO,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -88,7 +88,7 @@ fun CoinListItem(
 @PreviewLightDark
 @Composable
 private fun CoinListItemPreview() {
-    CryptoTrackerTheme {
+    CoinScopeTheme {
         CoinListItem(
             coinVO = previewCoinBO,
             onClick = { /*TODO*/ },

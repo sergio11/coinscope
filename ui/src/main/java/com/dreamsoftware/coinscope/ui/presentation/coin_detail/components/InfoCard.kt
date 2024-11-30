@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dreamsoftware.coinscope.ui.R
-import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
+import com.dreamsoftware.coinscope.ui.theme.CoinScopeTheme
 
 @Composable
 fun InfoCard(
@@ -109,7 +109,7 @@ fun InfoCard(
 @PreviewLightDark
 @Composable
 private fun InfoCardPreview() {
-    CryptoTrackerTheme {
+    CoinScopeTheme {
         InfoCard(
             title = "Price",
             formattedText = "$ 63,157.44",

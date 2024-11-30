@@ -21,11 +21,11 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dreamsoftware.coinscope.models.DisplayableNumberVO
-import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
+import com.dreamsoftware.coinscope.ui.theme.CoinScopeTheme
 import com.dreamsoftware.coinscope.ui.theme.greenBackground
 
 @Composable
-fun PriceChange(
+internal fun PriceChange(
     change: DisplayableNumberVO,
     modifier: Modifier = Modifier
 ) {
@@ -69,7 +69,7 @@ fun PriceChange(
 @PreviewLightDark
 @Composable
 private fun PriceChangePreview() {
-    CryptoTrackerTheme {
+    CoinScopeTheme {
         PriceChange(
             change = DisplayableNumberVO(
                 value = 2.43,

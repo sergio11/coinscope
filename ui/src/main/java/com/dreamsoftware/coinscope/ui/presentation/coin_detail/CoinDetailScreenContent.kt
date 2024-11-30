@@ -43,7 +43,7 @@ import com.dreamsoftware.coinscope.ui.presentation.coin_detail.components.InfoCa
 import com.dreamsoftware.coinscope.ui.presentation.coin_detail.components.LineChart
 import com.dreamsoftware.coinscope.ui.presentation.coin_list.components.previewCoinBO
 import com.dreamsoftware.coinscope.ui.presentation.core.extensions.toDisplayableNumber
-import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
+import com.dreamsoftware.coinscope.ui.theme.CoinScopeTheme
 import com.dreamsoftware.coinscope.ui.theme.greenBackground
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -184,7 +184,7 @@ internal fun CoinDetailScreenContent(
 @PreviewLightDark
 @Composable
 private fun CoinDetailScreenPreview() {
-    CryptoTrackerTheme {
+    CoinScopeTheme {
         CoinDetailScreenContent(
             uiState = CoinDetailUiState(
                 selectedCoin = previewCoinBO,

@@ -12,46 +12,9 @@ import javax.inject.Inject
 class CoinListViewModel @Inject constructor(
     private val getCoinsUseCase: GetCoinsUseCase,
     private val coinVoMapper: IOneSideMapper<CoinBO, CoinVO>
-) : SupportViewModel<CoinListUiState, CoinListSideEffects>() {
+) : SupportViewModel<CoinListUiState, CoinListSideEffects>(), CoinListScreenActions {
 
     override fun onGetDefaultState(): CoinListUiState = CoinListUiState()
-
-    /*private fun selectCoin(coinVO: CoinVO) {
-        _state.update { it.copy(selectedCoin = coinVO) }
-
-        viewModelScope.launch {
-            coinDataSource
-                .getCoinHistory(
-                    coinId = coinVO.id,
-                    start = ZonedDateTime.now().minusDays(5),
-                    end = ZonedDateTime.now()
-                )
-                .onSuccess { history ->
-                    val dataPointsUI = history
-                        .sortedBy { it.dateTime }
-                        .map {
-                            DataPointVO(
-                                x = it.dateTime.hour.toFloat(),
-                                y = it.priceUsd.toFloat(),
-                                xLabel = DateTimeFormatter
-                                    .ofPattern("ha\nM/d")
-                                    .format(it.dateTime)
-                            )
-                        }
-
-                    _state.update {
-                        it.copy(
-                            selectedCoin = it.selectedCoin?.copy(
-                                coinPriceHistory = dataPointsUI
-                            )
-                        )
-                    }
-                }
-                .onError { error ->
-                    _events.send(CoinListSideEffects.Error(error))
-                }
-        }
-    }*/
 
     fun loadCoins() {
         executeUseCase(
@@ -62,5 +25,9 @@ class CoinListViewModel @Inject constructor(
 
     private fun onLoadCoinsCompleted(coinList: List<CoinBO>) {
         updateState { it.copy(coins = coinVoMapper.mapInListToOutList(coinList).toList()) }
+    }
+
+    override fun onOpenCoinDetail(coin: CoinVO) {
+       launchSideEffect(CoinListSideEffects.OpenCoinDetail(coin))
     }
 }

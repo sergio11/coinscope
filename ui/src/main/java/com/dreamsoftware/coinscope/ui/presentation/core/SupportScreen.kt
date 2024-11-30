@@ -1,6 +1,5 @@
 package com.dreamsoftware.coinscope.ui.presentation.core
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -12,13 +11,11 @@ fun <UI: UiState<UI>, SE: SideEffect, VM: SupportViewModel<UI, SE>> SupportScree
     viewModel: VM,
     onInitialUiState: () -> UI,
     onInit: VM.() -> Unit = {},
-    onBackPressed: () -> Unit = {},
     onSideEffect: VM.(SE) -> Unit = {},
     onResume: VM.() -> Unit = {},
     onPause: VM.() -> Unit = {},
     content: @Composable VM.(uiState: UI) -> Unit
 ) {
-    BackHandler(onBack = onBackPressed)
     with(viewModel) {
         val lifecycle = LocalLifecycleOwner.current.lifecycle
         ConsumeSideEffects(

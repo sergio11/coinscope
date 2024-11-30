@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.dreamsoftware.coinscope.ui.navigation.AdaptiveCoinListDetailPane
-import com.dreamsoftware.coinscope.ui.theme.CryptoTrackerTheme
+import com.dreamsoftware.coinscope.ui.theme.CoinScopeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CryptoTrackerTheme {
+            CoinScopeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     AdaptiveCoinListDetailPane(
                         modifier = Modifier.padding(innerPadding)
