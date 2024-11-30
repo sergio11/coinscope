@@ -3,7 +3,7 @@ package com.dreamsoftware.coinscope.di
 import com.dreamsoftware.coinscope.data.networking.HttpClientFactory
 import com.dreamsoftware.coinscope.data.networking.RemoteCoinDataSource
 import com.dreamsoftware.coinscope.domain.CoinDataSource
-import com.dreamsoftware.coinscope.crypto.presentation.coin_list.CoinListViewModel
+import com.dreamsoftware.coinscope.ui.presentation.coin_list.CoinListViewModel
 import io.ktor.client.engine.cio.CIO
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
