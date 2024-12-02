@@ -2,6 +2,12 @@
 
 **CoinScope** is a **native Android application** designed to monitor cryptocurrency prices and trends. Leveraging modern technologies, clean architecture principles, and best practices, it ensures a seamless and efficient experience for cryptocurrency enthusiasts.  
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white" />
+  <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" />
+  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" />
+  <img src="https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white" />
+</p>
 
 ## 🌟 **Features**  
 
