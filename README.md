@@ -2,6 +2,10 @@
 
 **CoinScope** is a **native Android application** designed to monitor cryptocurrency prices and trends. Leveraging modern technologies, clean architecture principles, and best practices, it ensures a seamless and efficient experience for cryptocurrency enthusiasts.  
 
+I would like to express my gratitude to [philipplackner/CryptoTracker](https://github.com/philipplackner/CryptoTracker) for providing the initial foundation for this project. The **CryptoTracker** repository served as a great starting point and inspiration for building a cryptocurrency tracking application.  
+
+While the original project provided a solid base, I decided to implement a different architectural approach, focusing on **modularization** and applying **clean architecture principles**. This structure is more suited for long-term projects with larger teams, ensuring better scalability, maintainability, and flexibility as the project grows.  
+
 <p align="center">
   <img src="https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white" />
   <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" />
@@ -72,3 +76,19 @@ By using this architecture, CoinScope ensures that each part of the app is indep
   &nbsp;&nbsp;&nbsp;
   <img width="250px" loading="lazy" src="screenshots/picture_3.png" />
 </p>
+
+## 🙏 Acknowledgements
+
+I would like to express my gratitude to [philipplackner/CryptoTracker](https://github.com/philipplackner/CryptoTracker) for providing the initial foundation for this project. The **CryptoTracker** repository served as a great starting point and inspiration for building a cryptocurrency tracking application.  
+
+While the original project provided a solid base, I decided to implement a different architectural approach, focusing on **modularization** and applying **clean architecture principles**. This structure is more suited for long-term projects with larger teams, ensuring better scalability, maintainability, and flexibility as the project grows.  
+ 
+ ## Visitors Count
+
+ <img width="auto" src="https://profile-counter.glitch.me/coinscope/count.svg" />
+
+ ## Please Share & Star the repository to keep me motivated.
+  <a href = "https://github.com/sergio11/coinscope/stargazers">
+     <img src = "https://img.shields.io/github/stars/sergio11/coinscope" />
+  </a>
+
