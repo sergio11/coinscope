@@ -5,4 +5,5 @@ import com.dreamsoftware.coinscope.ui.presentation.core.IScreenActionListener
 
 interface CoinListScreenActions: IScreenActionListener {
     fun onOpenCoinDetail(coin: CoinVO)
+    fun onRetry()
 }

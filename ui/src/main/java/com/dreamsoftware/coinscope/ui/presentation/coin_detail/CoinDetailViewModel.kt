@@ -4,7 +4,6 @@ import com.dreamsoftware.coinscope.domain.model.CoinPriceBO
 import com.dreamsoftware.coinscope.domain.usecase.GetCoinHistoricalPriceUseCase
 import com.dreamsoftware.coinscope.models.CoinVO
 import com.dreamsoftware.coinscope.models.DataPointVO
-import com.dreamsoftware.coinscope.ui.presentation.coin_list.CoinListUiState
 import com.dreamsoftware.coinscope.ui.presentation.core.IErrorMapper
 import com.dreamsoftware.coinscope.ui.presentation.core.SupportViewModel
 import com.dreamsoftware.coinscope.utils.IOneSideMapper
@@ -17,22 +16,13 @@ class CoinDetailViewModel @Inject constructor(
     private val getCoinHistoricalPriceUseCase: GetCoinHistoricalPriceUseCase,
     private val dataPointMapper: IOneSideMapper<CoinPriceBO, DataPointVO>,
     @CoinDetailScreenErrorMapper private val errorMapper: IErrorMapper,
-) : SupportViewModel<CoinDetailUiState, CoinDetailSideEffects>() {
+) : SupportViewModel<CoinDetailUiState, CoinDetailSideEffects>(), CoinDetailScreenActions {
 
     override fun onGetDefaultState(): CoinDetailUiState = CoinDetailUiState()
 
     fun loadCoinDetail(coin: CoinVO) {
         updateState { it.copy(selectedCoin = coin) }
-        executeUseCaseWithParams(
-            useCase = getCoinHistoricalPriceUseCase,
-            params = GetCoinHistoricalPriceUseCase.Params(
-                coinId = coin.id,
-                start = ZonedDateTime.now().minusDays(5),
-                end = ZonedDateTime.now()
-            ),
-            onSuccess = ::onLoadCoinDetailCompleted,
-            onMapExceptionToState = ::onMapExceptionToState
-        )
+        loadCoinHistoricalPrices(coin.id)
     }
 
     private fun onLoadCoinDetailCompleted(coinPrices: List<CoinPriceBO>) {
@@ -51,4 +41,23 @@ class CoinDetailViewModel @Inject constructor(
         uiState.copy(
             errorMessage = errorMapper.mapToMessage(ex)
         )
+
+    override fun onRetry() {
+        doOnUiState {
+            selectedCoin?.id?.let(::loadCoinHistoricalPrices)
+        }
+    }
+
+    private fun loadCoinHistoricalPrices(id: String) {
+        executeUseCaseWithParams(
+            useCase = getCoinHistoricalPriceUseCase,
+            params = GetCoinHistoricalPriceUseCase.Params(
+                coinId = id,
+                start = ZonedDateTime.now().minusDays(5),
+                end = ZonedDateTime.now()
+            ),
+            onSuccess = ::onLoadCoinDetailCompleted,
+            onMapExceptionToState = ::onMapExceptionToState
+        )
+    }
 }

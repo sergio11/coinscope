@@ -18,9 +18,9 @@ class CoinListViewModel @Inject constructor(
 
     override fun onGetDefaultState(): CoinListUiState = CoinListUiState()
 
-    fun loadCoins() {
+    fun loadCoins(forceLoad: Boolean = false) {
         doOnUiState {
-            if(coins.isEmpty()) {
+            if(forceLoad || coins.isEmpty()) {
                 executeUseCase(
                     useCase = getCoinsUseCase,
                     onSuccess = ::onLoadCoinsCompleted,
@@ -36,6 +36,10 @@ class CoinListViewModel @Inject constructor(
 
     override fun onOpenCoinDetail(coin: CoinVO) {
        launchSideEffect(CoinListSideEffects.OpenCoinDetail(coin))
+    }
+
+    override fun onRetry() {
+        loadCoins(forceLoad = true)
     }
 
     private fun onMapExceptionToState(ex: Exception, uiState: CoinListUiState) =

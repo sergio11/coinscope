@@ -22,7 +22,8 @@ fun CoinDetailScreen(
         }
     ) { uiState ->
         CoinDetailScreenContent(
-            uiState = uiState
+            uiState = uiState,
+            actions = viewModel
         )
     }
 }
