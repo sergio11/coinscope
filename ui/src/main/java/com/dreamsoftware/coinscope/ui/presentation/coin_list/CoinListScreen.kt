@@ -22,7 +22,7 @@ fun CoinListScreen(
             }
         },
         onResume = {
-            loadCoins()
+            loadCoins(forceLoad = true)
         }
     ) { uiState ->
         CoinListScreenContent(
