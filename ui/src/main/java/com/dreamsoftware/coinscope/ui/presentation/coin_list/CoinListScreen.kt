@@ -20,9 +20,6 @@ fun CoinListScreen(
             when(it) {
                 is CoinListSideEffects.OpenCoinDetail -> onOpenCoinDetail(it.coin)
             }
-        },
-        onResume = {
-            loadCoins(forceLoad = true)
         }
     ) { uiState ->
         CoinListScreenContent(

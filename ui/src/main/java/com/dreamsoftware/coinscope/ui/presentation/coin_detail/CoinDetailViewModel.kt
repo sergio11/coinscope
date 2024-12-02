@@ -1,5 +1,6 @@
 package com.dreamsoftware.coinscope.ui.presentation.coin_detail
 
+import androidx.lifecycle.SavedStateHandle
 import com.dreamsoftware.coinscope.domain.model.CoinPriceBO
 import com.dreamsoftware.coinscope.domain.usecase.GetCoinHistoricalPriceUseCase
 import com.dreamsoftware.coinscope.models.CoinVO
@@ -16,7 +17,8 @@ class CoinDetailViewModel @Inject constructor(
     private val getCoinHistoricalPriceUseCase: GetCoinHistoricalPriceUseCase,
     private val dataPointMapper: IOneSideMapper<CoinPriceBO, DataPointVO>,
     @CoinDetailScreenErrorMapper private val errorMapper: IErrorMapper,
-) : SupportViewModel<CoinDetailUiState, CoinDetailSideEffects>(), CoinDetailScreenActions {
+    savedStateHandle: SavedStateHandle
+) : SupportViewModel<CoinDetailUiState, CoinDetailSideEffects>(savedStateHandle), CoinDetailScreenActions {
 
     override fun onGetDefaultState(): CoinDetailUiState = CoinDetailUiState()
 

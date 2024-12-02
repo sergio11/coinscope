@@ -1,5 +1,6 @@
 package com.dreamsoftware.coinscope.ui.presentation.coin_list
 
+import androidx.lifecycle.SavedStateHandle
 import com.dreamsoftware.coinscope.domain.model.CoinBO
 import com.dreamsoftware.coinscope.domain.usecase.GetCoinsUseCase
 import com.dreamsoftware.coinscope.models.CoinVO
@@ -14,7 +15,8 @@ class CoinListViewModel @Inject constructor(
     private val getCoinsUseCase: GetCoinsUseCase,
     private val coinVoMapper: IOneSideMapper<CoinBO, CoinVO>,
     @CoinListScreenErrorMapper private val errorMapper: IErrorMapper,
-) : SupportViewModel<CoinListUiState, CoinListSideEffects>(), CoinListScreenActions {
+    savedStateHandle: SavedStateHandle
+) : SupportViewModel<CoinListUiState, CoinListSideEffects>(savedStateHandle), CoinListScreenActions {
 
     override fun onGetDefaultState(): CoinListUiState = CoinListUiState()
 

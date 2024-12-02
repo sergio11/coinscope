@@ -1,6 +1,8 @@
 package com.dreamsoftware.coinscope.ui.presentation.core
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.dreamsoftware.coinscope.domain.usecase.core.SupportUseCase
 import com.dreamsoftware.coinscope.domain.usecase.core.SupportUseCaseWithParams
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -8,8 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import java.io.Serializable
 
 /**
  * Abstract base class for ViewModels that support UI state management and side effects.
@@ -17,12 +19,15 @@ import kotlinx.coroutines.launch
  * @param STATE The type representing the UI state.
  * @param EFFECT The type representing side effects.
  */
-abstract class SupportViewModel<STATE : UiState<STATE>, EFFECT : SideEffect> : ViewModel(), IScreenActionListener {
+abstract class SupportViewModel<STATE : UiState<STATE>, EFFECT : SideEffect>(
+    private val savedStateHandle: SavedStateHandle
+) : ViewModel(), IScreenActionListener {
 
     private companion object {
         const val ENABLE_REPLAY_SIDE_EFFECTS = 1
         const val DISABLE_REPLAY_SIDE_EFFECTS = 0
         const val EXTRA_BUFFER_CAPACITY_SIZE = 64
+        const val UI_STATE_KEY = "ui_state_key"
     }
 
     // MutableStateFlow for managing UI state
@@ -52,6 +57,14 @@ abstract class SupportViewModel<STATE : UiState<STATE>, EFFECT : SideEffect> : V
 
     val sideEffectWithoutReplay: SharedFlow<EFFECT> = _sideEffectWithoutReplay.asSharedFlow()
 
+    init {
+         // Try to restore the UI state from the SavedStateHandle
+        savedStateHandle.get<STATE>(UI_STATE_KEY)?.let { restoredState ->
+            // If there is a saved state, update the UI state
+            _uiState.value = restoredState
+        }
+    }
+
     /**
      * Provides the default UI state when the ViewModel is initialized.
      *
@@ -69,7 +82,9 @@ abstract class SupportViewModel<STATE : UiState<STATE>, EFFECT : SideEffect> : V
      * @param reducer A function that takes the current state and returns the new state.
      */
     protected fun updateState(reducer: (currentState: STATE) -> STATE) {
-        _uiState.value = reducer(_uiState.value)
+        _uiState.value = reducer(_uiState.value).also {
+            savedStateHandle[UI_STATE_KEY] = it
+        }
     }
 
     /**
@@ -287,7 +302,7 @@ abstract class SupportViewModel<STATE : UiState<STATE>, EFFECT : SideEffect> : V
 abstract class UiState<out T : UiState<T>>(
     open val isLoading: Boolean,
     open val errorMessage: String?
-) {
+): Serializable {
     abstract fun copyState(
         isLoading: Boolean = this.isLoading,
         errorMessage: String? = this.errorMessage
