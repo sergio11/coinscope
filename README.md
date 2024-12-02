@@ -18,31 +18,35 @@
 - 🗂️ **Modular architecture**: Highly maintainable, scalable, and resilient to changes.
 
 
-## 🛠 **Development Approach**  
+## 🛠️ **Development Approach**  
 
-CoinScope follows industry best practices, including:  
+CoinScope is built with **industry best practices** and follows key principles to ensure a high-quality, maintainable, and scalable codebase. The app’s development approach embraces modern architectural patterns, modularization, and strong separation of concerns, providing a solid foundation for future growth. Here's a breakdown of the key strategies used in the development process:
 
-### **Architecture Principles**  
+### **🏗️ Architecture Principles**  
 
 1. **SOLID Principles**:  
-   - Ensures maintainable, scalable, and resilient code.  
-   - Encourages single-responsibility design for better separation of concerns.  
+   - 📏 **Maintainability**: The code is designed to be flexible and easy to extend.  
+   - 🔄 **Scalability**: As new features and functionalities are added, the app remains robust and adaptable.  
+   - 🧩 **Separation of Concerns**: Every component has a clear responsibility, ensuring code is easier to manage, test, and modify.  
 
 2. **Clean Architecture**:  
-   - **Use Cases**: Serve as the backbone of the business logic, isolating the `ViewModel` from any changes in business logic.  
-   - **Layered Separation**:  
-     - **UI Layer**: Manages user interactions and displays information.  
-     - **Domain Layer**: Contains business logic and use cases.  
-     - **Data Layer**: Manages data sources and abstracts data retrieval (via repositories).  
+   - ⚙️ **Use Cases**: The core business logic is decoupled from the UI layer, making it independent of the `ViewModel` and enabling easier modifications and unit testing.  
+   - 🏢 **Layered Separation**:  
+     - **UI Layer** 💻: Handles all user interactions and displays content, ensuring the interface is intuitive and responsive.  
+     - **Domain Layer** 🧠: Contains the application’s business logic and use cases, acting as the brain of the app.  
+     - **Data Layer** 💾: Manages data retrieval and abstracts the complexities of data sources, including repositories and remote data fetching (e.g., with **Ktor**).  
 
-### **Modularization**  
+### **🔲 Modularization**  
 
-CoinScope is structured into separate modules, ensuring each component is self-contained and reusable:  
-- **`ui`**: Handles the user interface and presentation logic.  
-- **`domain`**: Contains business logic, models, and use cases.  
-- **`data`**: Implements data sources and repositories, providing abstractions for data access.  
-- **`utils`**: Offers reusable utility functions and helpers.  
-- **`app`**: Ties all the modules together into a cohesive application.  
+CoinScope follows a **modular architecture** to promote a clean, flexible, and reusable codebase. Each feature is encapsulated in its own module, making the app easy to maintain and extend:
+
+- **`ui`** 🎨: Contains everything related to the user interface, ensuring a smooth, modern experience with **Jetpack Compose**.  
+- **`domain`** 🧑‍💻: Holds the business logic, models, and use cases, keeping the application’s core functionality separated from other concerns.  
+- **`data`** 📡: Handles all data-related tasks, including data sources, repositories, and communication with remote servers.  
+- **`utils`** 🔧: Provides a set of reusable utility functions and helpers to reduce redundancy and increase efficiency across the app.  
+- **`app`** 🏗️: The central module that ties everything together and serves as the entry point of the application.  
+
+By using this architecture, CoinScope ensures that each part of the app is independent, maintainable, and easy to test, while also allowing for future updates and improvements with minimal effort.  
 
 ### **Dependency Injection**  
 
@@ -55,4 +59,16 @@ CoinScope is structured into separate modules, ensuring each component is self-c
 - **Ktor**: A flexible and asynchronous HTTP client for seamless data fetching.  
 - **Dagger Hilt**: Simplifies dependency injection across the app.  
 - **Kotlin Coroutines & Flows**: Provides a robust and reactive way to handle asynchronous data streams.  
-- **MVI Architecture**: Implements a unidirectional data flow for predictable and testable state management.  
+- **MVI Architecture**: Implements a unidirectional data flow for predictable and testable state management.
+
+
+## **App screenshots**  
+
+
+<p>
+  <img width="250px" loading="lazy" src="screenshots/picture_1.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_2.png" />
+  &nbsp;&nbsp;&nbsp;
+  <img width="250px" loading="lazy" src="screenshots/picture_3.png" />
+</p>
