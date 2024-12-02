@@ -1,5 +1,6 @@
 package com.dreamsoftware.coinscope.data.remote.datasource.impl.core
 
+import com.dreamsoftware.coinscope.data.BuildConfig
 import com.dreamsoftware.coinscope.data.remote.exception.NetworkError
 import com.dreamsoftware.coinscope.data.remote.exception.NetworkException
 import io.ktor.client.call.NoTransformationFoundException
@@ -22,6 +23,12 @@ abstract class SupportRemoteDataSourceImpl(
         const val HTTP_STATUS_TOO_MANY_REQUESTS = 429
         const val HTTP_STATUS_SERVER_ERROR_MIN = 500
         const val HTTP_STATUS_SERVER_ERROR_MAX = 599
+    }
+
+    protected fun buildFinalUrl(url: String): String = when {
+        url.contains(BuildConfig.BASE_URL) -> url
+        url.startsWith("/") -> BuildConfig.BASE_URL + url.drop(1)
+        else -> BuildConfig.BASE_URL + url
     }
 
     protected suspend inline fun <reified T> safeCall(

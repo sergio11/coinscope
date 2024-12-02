@@ -2,6 +2,7 @@ package com.dreamsoftware.coinscope.di
 
 import com.dreamsoftware.coinscope.data.remote.datasource.IRemoteCoinDataSource
 import com.dreamsoftware.coinscope.data.remote.datasource.impl.RemoteCoinDataSourceImpl
+import com.dreamsoftware.coinscope.ui.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

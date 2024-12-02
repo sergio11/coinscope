@@ -1,6 +1,5 @@
 package com.dreamsoftware.coinscope.data.remote.datasource.impl
 
-import com.dreamsoftware.coinscope.data.remote.constructUrl
 import com.dreamsoftware.coinscope.data.remote.datasource.IRemoteCoinDataSource
 import com.dreamsoftware.coinscope.data.remote.datasource.impl.core.SupportRemoteDataSourceImpl
 import com.dreamsoftware.coinscope.data.remote.dto.CoinHistoryDTO
@@ -20,7 +19,7 @@ class RemoteCoinDataSourceImpl(
 
     @Throws(NetworkException::class)
     override suspend fun getCoins(): CoinsResponseDTO = safeCall {
-        httpClient.get(urlString = constructUrl("/assets"))
+        httpClient.get(urlString = buildFinalUrl("/assets"))
     }
 
     @Throws(NetworkException::class)
@@ -39,7 +38,7 @@ class RemoteCoinDataSourceImpl(
             .toEpochMilli()
 
         httpClient.get(
-            urlString = constructUrl("/assets/$coinId/history")
+            urlString = buildFinalUrl("/assets/$coinId/history")
         ) {
             parameter("interval", "h6")
             parameter("start", startMillis)

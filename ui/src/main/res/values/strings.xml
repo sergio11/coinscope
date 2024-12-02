@@ -8,4 +8,8 @@
     <string name="market_cap">Market Cap</string>
     <string name="price">Price</string>
     <string name="change_last_24h">Change last 24h</string>
+
+    <string name="get_coin_history_retrieval_exception">Failed to retrieve the coin history. Please try again later.</string>
+    <string name="get_coin_list_exception">Unable to load the list of coins. Check your connection and try again.</string>
+    <string name="generic_error_exception">An unexpected error occurred. Please try again later.</string>
 </resources>
